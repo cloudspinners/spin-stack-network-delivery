@@ -12,6 +12,23 @@ include Cloudspin::Stack::Rake
 
 environment_list = ['sandbox', 'test', 'staging']
 
+namespace :network do
+  environment_list.each { |environment|
+    namespace "#{environment}" do
+      network_stack = StackTask.new(
+        environment,
+        definition_folder: '../spin-stack-network/src',
+        configuration_files: [
+          '../spin-stack-network/stack-instance-defaults.yaml',
+          './stack-network-local.yaml',
+          "environments/stack-network-#{environment}.yaml"
+        ]
+      ).instance
+      InspecTask.new(stack_instance: network_stack)
+    end
+  }
+end
+
 namespace :statebucket do
   environment_list.each { |environment|
     namespace "#{environment}" do
