@@ -49,6 +49,17 @@ namespace :statebucket do
     end
   }
 
+  namespace :root do
+    StackTask.new(
+      definition_folder: '../spin-stack-s3bucket/src',
+      configuration_files: [
+        './stack-statebucket-defaults.yaml',
+        './stack-statebucket-local.yaml',
+        "environments/stack-statebucket-root.yaml"
+      ]
+    )
+  end
+
   namespace :all do
     desc 'Dry run for all of the statebuckets'
     task :dry => environment_list.map { |env| "statebucket:#{env}:dry" }
