@@ -3,4 +3,4 @@ instance:
 parameters:
   region: "eu-west-1"
   environment_name: local
-  bucket_base_name: local-network-statebucket
+  bucket_base_name: statebucket-local-network

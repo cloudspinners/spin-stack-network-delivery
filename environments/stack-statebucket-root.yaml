@@ -2,4 +2,4 @@ instance:
   group: root
 parameters:
   environment_name: root
-  bucket_base_name: root-network-statebucket
+  bucket_base_name: statebucket-root-network

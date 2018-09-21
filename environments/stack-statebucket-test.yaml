@@ -2,4 +2,4 @@ instance:
   group: test
 parameters:
   environment_name: test
-  bucket_base_name: test-network-statebucket
+  bucket_base_name: statebucket-test-network
