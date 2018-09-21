@@ -22,12 +22,8 @@ namespace :network do
     namespace "#{environment}" do
       network_stack = StackTask.new(
         environment,
-        definition_folder: '../spin-stack-network/src',
-        configuration_files: [
-          '../spin-stack-network/stack-instance-defaults.yaml',
-          './stack-network-local.yaml',
-          "environments/stack-network-#{environment}.yaml"
-        ]
+        role: 'network',
+        definition_folder: '../spin-stack-network/src'
       ).instance
       InspecTask.new(stack_instance: network_stack)
     end
@@ -39,24 +35,17 @@ namespace :statebucket do
     namespace "#{environment}" do
       StackTask.new(
         environment,
-        definition_folder: '../spin-stack-s3bucket/src',
-        configuration_files: [
-          './stack-statebucket-defaults.yaml',
-          './stack-statebucket-local.yaml',
-          "environments/stack-statebucket-#{environment}.yaml"
-        ]
+        role: 'statebucket',
+        definition_folder: '../spin-stack-s3bucket/src'
       )
     end
   }
 
   namespace :root do
     StackTask.new(
-      definition_folder: '../spin-stack-s3bucket/src',
-      configuration_files: [
-        './stack-statebucket-defaults.yaml',
-        './stack-statebucket-local.yaml',
-        "environments/stack-statebucket-root.yaml"
-      ]
+      'root',
+      role: 'statebucket',
+      definition_folder: '../spin-stack-s3bucket/src'
     )
   end
 
@@ -77,20 +66,14 @@ end
 
 namespace :account do
   StackTask.new(
-    definition_folder: '../spin-stack-iam-roles/src',
-    configuration_files: [
-      './stack-account-defaults.yaml',
-      './stack-account-local.yaml'
-    ]
+    role: 'account',
+    definition_folder: '../spin-stack-iam-roles/src'
   )
 end
 
 namespace :pipeline do
   StackTask.new(
-    definition_folder: '../spin-stack-codepipeline/src',
-    configuration_files: [
-      './stack-pipeline-defaults.yaml',
-      './stack-pipeline-local.yaml'
-    ]
+    role: 'pipeline',
+    definition_folder: '../spin-stack-codepipeline/src'
   )
 end
