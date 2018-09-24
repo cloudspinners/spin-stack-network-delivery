@@ -3,3 +3,6 @@ instance:
 parameters:
   region: "eu-west-1"
   environment_name: local
+terraform_backend:
+  region: eu-west-1
+  bucket: statebucket-root-network-XXXXXXXXXXXX

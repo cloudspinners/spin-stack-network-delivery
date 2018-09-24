@@ -1,6 +1,6 @@
 instance:
-  group: local
+  group: root
 parameters:
   region: "eu-west-1"
-  environment_name: local
-  bucket_base_name: statebucket-local-network
+  environment_name: root
+  bucket_base_name: statebucket-root-network

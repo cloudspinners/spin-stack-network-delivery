@@ -31,37 +31,14 @@ namespace :network do
 end
 
 namespace :statebucket do
-  environment_list.each { |environment|
-    namespace "#{environment}" do
-      StackTask.new(
-        environment,
-        role: 'statebucket',
-        definition_folder: '../spin-stack-s3bucket/src'
-      )
-    end
-  }
-
-  namespace :root do
-    StackTask.new(
-      'root',
-      role: 'statebucket',
-      definition_folder: '../spin-stack-s3bucket/src'
-    )
-  end
-
-  namespace :all do
-    desc 'Dry run for all of the statebuckets'
-    task :dry => environment_list.map { |env| "statebucket:#{env}:dry" }
-
-    desc 'Plan all of the statebuckets'
-    task :plan => environment_list.map { |env| "statebucket:#{env}:plan" }
-
-    desc 'Up for all of the statebuckets'
-    task :up => environment_list.map { |env| "statebucket:#{env}:up" }
-
-    desc 'Down for all of the statebuckets'
-    task :down => environment_list.map { |env| "statebucket:#{env}:down" }
-  end
+  StackTask.new(
+    role: 'statebucket',
+    definition_folder: '../spin-stack-s3bucket/src',
+    configuration_files: [
+      './stack-statebucket-defaults.yaml',
+      './stack-statebucket-local.yaml'
+    ]
+  )
 end
 
 namespace :account do

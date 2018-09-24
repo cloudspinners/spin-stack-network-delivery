@@ -2,3 +2,5 @@ instance:
   group: sandbox
 parameters:
   environment_name: sandbox
+terraform_backend:
+  region: eu-west-1
